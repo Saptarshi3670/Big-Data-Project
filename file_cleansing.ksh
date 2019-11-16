@@ -1,6 +1,6 @@
 #!/bin/ksh
 ## File Cleansing
-cd /Users/saptarshimaiti/Desktop/Big\ Data\ technologies/Project/music
+cd /Users/saptarshimaiti/Desktop/Big\ Data\ technologies/Project/music ## File path where the files are placed
 
 sed 's/[][]//g' TRACKS.csv >> /Users/saptarshimaiti/Desktop/Big\ Data\ technologies/Project/hdf\ conversion\ test/Cleaned\ files/TRACKS.csv
 
