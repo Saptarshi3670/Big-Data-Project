@@ -1,90 +1,49 @@
-# Welcome to GitHub
-
-Welcome to GitHub—where millions of developers work together on software. Ready to get started? Let’s learn how this all works by building and publishing your first GitHub Pages website!
-
-## Repositories
-
-Right now, we’re in your first GitHub **repository**. A repository is like a folder or storage space for your project. Your project's repository contains all its files such as code, documentation, images, and more. It also tracks every change that you—or your collaborators—make to each file, so you can always go back to previous versions of your project if you make any mistakes.
-
-This repository contains three important files: The HTML code for your first website on GitHub, the CSS stylesheet that decorates your website with colors and fonts, and the **README** file. It also contains an image folder, with one image file.
-
-## Describe your project
-
-You are currently viewing your project's **README** file. **_README_** files are like cover pages or elevator pitches for your project. They are written in plain text or [Markdown language](https://guides.github.com/features/mastering-markdown/), and usually include a paragraph describing the project, directions on how to use it, who authored it, and more.
-
-[Learn more about READMEs](https://help.github.com/en/articles/about-readmes)
-
-## Your first website
-
-**GitHub Pages** is a free and easy way to create a website using the code that lives in your GitHub repositories. You can use GitHub Pages to build a portfolio of your work, create a personal website, or share a fun project that you coded with the world. GitHub Pages is automatically enabled in this repository, but when you create new repositories in the future, the steps to launch a GitHub Pages website will be slightly different.
-
-[Learn more about GitHub Pages](https://pages.github.com/)
-
-## Rename this repository to publish your site
-
-We've already set-up a GitHub Pages website for you, based on your personal username. This repository is called `hello-world`, but you'll rename it to: `username.github.io`, to match your website's URL address. If the first part of the repository doesn’t exactly match your username, it won’t work, so make sure to get it right.
-
-Let's get started! To update this repository’s name, click the `Settings` tab on this page. This will take you to your repository’s settings page. 
-
-![repo-settings-image](https://user-images.githubusercontent.com/18093541/63130482-99e6ad80-bf88-11e9-99a1-d3cf1660b47e.png)
-
-Under the **Repository Name** heading, type: `username.github.io`, where username is your username on GitHub. Then click **Rename**—and that’s it. When you’re done, click your repository name or browser’s back button to return to this page.
-
-<img width="1039" alt="rename_screenshot" src="https://user-images.githubusercontent.com/18093541/63129466-956cc580-bf85-11e9-92d8-b028dd483fa5.png">
-
-Once you click **Rename**, your website will automatically be published at: https://your-username.github.io/. The HTML file—called `index.html`—is rendered as the home page and you'll be making changes to this file in the next step.
-
-Congratulations! You just launched your first GitHub Pages website. It's now live to share with the entire world
-
-## Making your first edit
-
-When you make any change to any file in your project, you’re making a **commit**. If you fix a typo, update a filename, or edit your code, you can add it to GitHub as a commit. Your commits represent your project’s entire history—and they’re all saved in your project’s repository.
-
-With each commit, you have the opportunity to write a **commit message**, a short, meaningful comment describing the change you’re making to a file. So you always know exactly what changed, no matter when you return to a commit.
-
-## Practice: Customize your first GitHub website by writing HTML code
-
-Want to edit the site you just published? Let’s practice commits by introducing yourself in your `index.html` file. Don’t worry about getting it right the first time—you can always build on your introduction later.
-
-Let’s start with this template:
-
-```
-<p>Hello World! I’m [username]. This is my website!</p>
-```
-
-To add your introduction, copy our template and click the edit pencil icon at the top right hand corner of the `index.html` file.
-
-<img width="997" alt="edit-this-file" src="https://user-images.githubusercontent.com/18093541/63131820-0794d880-bf8d-11e9-8b3d-c096355e9389.png">
+## Project Name: Analysing Music Tracks for Popularity Prediction and Recommendation.
+Data Size: 1.8 GB, 10000 songs with 54 features (Subset of Million Song Dataset). The complete dataset is split into several HDF5 that is compressed format to store large, complex and heterogeneous data files with each file representing one track with related meta-data like audio analysis, artist information, release date, etc.
+Team Name: Data Worms
+Team Members:  Kapil Khond | CWID: A20445656                                                                                                                             
+               Ragi Saxena | CWID: A20432410
+               Saptarshi Maiti | CWID: A20447671
+               Ajith Kumar Vakkalaganti Sunil Kumar | CWID: A20446704
 
 
-Delete this placeholder line:
+## Literature Review :
+Top tier streaming companies rely on huge data sets to provide music recommendations for users. Users are either recommended with newly released tracks or tracks which users have never come across.
 
-```
-<p>Welcome to your first GitHub Pages website!</p>
-```
-
-Then, paste the template to line 15 and fill in the blanks.
-
-<img width="1032" alt="edit-githuboctocat-index" src="https://user-images.githubusercontent.com/18093541/63132339-c3a2d300-bf8e-11e9-8222-59c2702f6c42.png">
+We reviewed 4 papers whose goals are very similar to our work.
+First article is “Design and Implementation of Music Recommendation System Based on Hadoop“ by Yufeng, Zhao & Xinwei, Li. The proposed approach is based on distributed computing (MapReduce). The recommendation algorithm introduces K means clustering to improve the accuracy of the recommendation based on user-based collaborative filtering. Hadoop was used for storage and analysis purposes. The process of traditional user-based collaborative filtering involves constructing user-song data relational matrix, generating the nearest neighbor set and producing recommendations and in addition to this, introducing K means clustering improves the recommendation with high user similarity using minimum distance concept. Methods involving the removal of free points and selection of random points will have an impact on the efficiency of K means algorithm. Hadoop cluster is used in the recommendation algorithm layer, Java Servlets on the server side and MySQL for development. This paper puts forward a method of designing a recommendation system which incorporates K means clustering in traditional user based collaborative filtering recommendation algorithm which improves the overall precision.
 
 
-When you’re done, scroll down to the `Commit changes` section near the bottom of the edit page. Add a short message explaining your change, like "Add my introduction", then click `Commit changes`.
+
+Second article is “A Music Recommendation System Based on Music and User Grouping” by Hung-Chen Chen, Arbee L.P.Chen. The recommendation system proposed here is based on music data grouping and user’s interests. Here the Feature extractor and Classifier which are the core modules of recommendation system work together on music objects to assign group numbers based on the extracted features. A profile manager is further created from the above results and is engaged in several methods of recommendation namely content based recommendation where users are recommended based on former history of users, collaborative based where the recommendation is based on the interest of relevant users and statistical 
+recommendation which works upon the combinational statistics to provide recommendations. In conclusion, for the three recommendation methods, the precision of the content based approach proves to be better than the collaborative and statistical methods. On the contrary, the collaborative method tends to provide unexpected music objects for users, which may be interesting. In addition, the statistical method provides hot music groups derived from all access histories. Therefore, the recommendation result of the statistical method proves to be better than that of the collaborative method. 
 
 
-<img width="1030" alt="add-my-username" src="https://user-images.githubusercontent.com/18093541/63131801-efbd5480-bf8c-11e9-9806-89273f027d16.png">
 
-Once you click `Commit changes`, your changes will automatically be published on your GitHub Pages website. Refresh the page to see your new changes live in action.
+Third article is “Rage Against The Machine Learning: Predicting Song Popularity” by Cody ”C-Dawg” Kala , Andreas ”King-of-the-Keys” Garcia and Gabriel ”Getaway Driver” Barajas. Here some of the features including song key, tempo, average loudness, hotness/popularity index, string terms (out of the box features which might need further processing) and other acoustic features were focussed upon to predict the song popularity. The extracted features were briefly broken down into macro-level, micro-level, bag-of-words and location features. The deciding factors that affect the popularity of the song were determined by applying several machine learning algorithms and techniques involving feature extraction, clustering, regression, classification and selection. Linear regression with polynomial terms has better results compared to other regressions with enough L2 regularization. Significance of these features are determined for higher positive values indicating strong correlation with the popularity index/hotness.
 
-:tada: You just made your first commit! :tada:
 
-## Extra Credit: Keep on building!
 
-Change the placeholder Octocat gif on your GitHub Pages website by [creating your own personal Octocat emoji](https://myoctocat.com/build-your-octocat/) or [choose a different Octocat gif from our logo library here](https://octodex.github.com/). Add that image to line 12 of your `index.html` file, in place of the `<img src=` link.
+Fourth article is “Predicting Song Popularity by James Q. Pham , Edric Kyauk and Edwin Park”. In this article the prediction of popularity of songs is done using both acoustic and meta-data features. As per their findings metadata features were found more predicative than the acoustic features like artist familiarity, year, loudness and some tag words, and a possible reason for this can be because of a lot of variation in acoustic features within a single song which makes extraction of metrics difficult, whereas metadata such as genre tags or year of release are much better at accurately reflecting a trait of a song. The classification algorithms, Logistic Regression, Linear Discriminant Analysis, Quadrant Discriminant Analysis, Support Vector Machines, Multilayer Perceptron Classification Algorithm are used to see whether a song is popular or not and in addition to accuracy, precision and recall, F1 and AUC scores of the models are also considered to classify the model. The highest F1 score was for SVM using the Gaussian kernel. Regresion is also applied as Classification loses valuable information about the value of the song popularity itself due to the binary conversion. MSE(Mean Squared Error) error metric is used to evaluate how the model predicts popularity.
 
-Want to add even more code and fun styles to your GitHub Pages website? [Follow these instructions](https://github.com/github/personal-website) to build a fully-fledged static website.
 
-![octocat](./images/create-octocat.png)
+Complete data was previously saved in UTF-8 format (predominantly using byte literals and unicode strings) and split into multiple HDF5 files. We further converted this data into single CSV file for convenient analysis purpose (decoding UTF-8, converting numpy array types into lists, structuring columns).
+Pushing the data into HDFS using HDFS commands
+We will be transforming and cleaning the data using Pig for convenient analysis
+We will store the transformed and cleaned data in Hive tables for analysis.
+We will create a pipeline to store relevant data into Hbase for ML model training for prediction and recommendation
+We will create machine learning models using Spark ML for predicting the popularity of a song 
+We will design recommendation system using collaborative,content based filtering 
+Ajith, Ragi, Saptarshi, Kapil
+Implementing K means clustering for improving the efficiency of recommendation system
+For real time recommendations we use Spark Streaming and Kafka
+Creating an API using FLASK for predicting popularity and Recommendations
 
-## Everything you need to know about GitHub
 
-Getting started is the hardest part. If there’s anything you’d like to know as you get started with GitHub, try searching [GitHub Help](https://help.github.com). Our documentation has tutorials on everything from changing your repository settings to configuring GitHub from your command line.
+## Citations:
+Yufeng, Zhao & Xinwei, Li. (2018). Design and Implementation of Music Recommendation System Based on Hadoop. 
+Hung-Chen Chen, Arbee L.P.Chen (2004). A Music Recommendation System Based on Music and User Grouping. 
+Cody ”C-Dawg” Kala , Andreas ”King-of-the-Keys” Garcia and Gabriel ”Getaway Driver” Barajas (2017). Rage Against The Machine Learning: Predicting Song Popularity.
+James Q. Pham , Edric Kyauk and Edwin Park (2015). Predicting Song Popularity.
+
+
