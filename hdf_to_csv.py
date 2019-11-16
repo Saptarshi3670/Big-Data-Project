@@ -5,8 +5,9 @@ import csv
 import numpy as np
 
 
-files = '/Users/saptarshimaiti/Downloads/MillionSongSubset/data/'
+files = '/Users/saptarshimaiti/Downloads/MillionSongSubset/data/' ## File path where the hdf files are placed
 
+##File path where you want to store the converted csv files
 csvTracksFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/TRACKS.csv'
 csvSimilarArtistFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/similar_artists.csv'
 csvArtistTermsFile='/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/artist_terms.csv'
