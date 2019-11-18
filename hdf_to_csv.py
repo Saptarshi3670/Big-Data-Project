@@ -5,9 +5,8 @@ import csv
 import numpy as np
 
 
-files = '/Users/saptarshimaiti/Downloads/MillionSongSubset/data/' ## File path where the hdf files are placed
+files = '/Users/saptarshimaiti/Downloads/MillionSongSubset/data/'
 
-##File path where you want to store the converted csv files
 csvTracksFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/TRACKS.csv'
 csvSimilarArtistFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/similar_artists.csv'
 csvArtistTermsFile='/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/artist_terms.csv'
@@ -97,13 +96,13 @@ with open(csvTracksFile, "w") as outputTracks, open(csvSimilarArtistFile, "w") a
 				trList = [artist_id.decode(), artists_mb_id.decode(), artist_playmeid, artist_7digitalid, artist_familarity, artist_name.decode(), artist_hotttnesss, artist_location.decode(), release.decode(), release_7digitalid, song_id.decode(), title.decode(), song_hotttnesss, track_7digitalid, analysis_sample_rate, audio_md5.decode(), duration, end_of_fade_in, energy, key, key_confidence, loudness, mode, mode_confidence, start_of_fade_out, tempo, time_signature, time_signature_confidence, track_id.decode(), year ]
 				writer_tracks.writerow(trList)
 
-				trList = [artist_id.decode(), np.array([x.decode() for x in similar_artists]) ]
+				trList = [artist_id.decode(), track_id.decode(), np.array([x.decode() for x in similar_artists]) ]
 				writer_similar_artists.writerow(trList)
 
 				trList = [artist_id.decode(), np.array([x.decode() for x in artist_terms]),artist_terms_freq, artist_terms_weight]
 				writer_artist_terms.writerow(trList)
 
-				trList = [track_id.decode(), segments_start, segments_confidence, segments_pitches, segments_timbre, segments_loudness_max, segments_loudness_max_time, segments_loudness_start]
+				trList = [track_id.decode(),segments_start, segments_confidence, segments_pitches, segments_timbre, segments_loudness_max, segments_loudness_max_time, segments_loudness_start]
 				writer_segments_file.writerow(trList)
 
 				trList = [track_id.decode(), sections_start, sections_confidence]
@@ -123,150 +122,6 @@ with open(csvTracksFile, "w") as outputTracks, open(csvSimilarArtistFile, "w") a
 
 
 				hdf.close()
-#os.close(outputTracks)
-	
-'''
 
-with open(csvSimilarArtistFile, "w") as outputSimilarArtists:
-	writer_similar_artists = csv.writer(outputSimilarArtists, lineterminator='\n')
-	for dirname, dirs, files in os.walk(files):
-		for filename in files:
-			filename_without_extension, extension = os.path.splitext(filename)
-			if extension == '.h5':
-				artist_id = hdf5_getters.get_artist_id(hdf)
-				similar_artists = hdf5_getters.get_similar_artists(hdf)
-				
-				trList = [artist_id.decode(), np.array([x.decode() for x in similar_artists]) ]
-
-				writer_similar_artists.writerow(trList)
-				hdf.close()
-os.close(outputSimilarArtists)
 	
 
-
-with open(csvArtistTermsFile, "w") as outputArtistTermsFile:
-	writer_artist_terms = csv.writer(outputArtistTermsFile, lineterminator='\n')
-	for dirname, dirs, files in os.walk(files):
-		for filename in files:
-			filename_without_extension, extension = os.path.splitext(filename)
-			if extension == '.h5':
-				artist_id = hdf5_getters.get_artist_id(hdf)
-				artist_terms = hdf5_getters.get_artist_terms(hdf)
-				artist_terms_freq = hdf5_getters.get_artist_terms_freq(hdf)
-				artist_terms_weight = hdf5_getters.get_artist_terms_weight(hdf)
-				
-				trList = [artist_id.decode(), np.array([x.decode() for x in artist_terms]),artist_terms_freq, artist_terms_weight]
-
-				writer_artist_terms.writerow(trList)
-				hdf.close()
-
-
-
-with open(csvSegmentsFile, "w") as outputSegmentsFile:
-	writer_segments_file = csv.writer(outputSegmentsFile, lineterminator='\n')
-	for dirname, dirs, files in os.walk(files):
-		for filename in files:
-			filename_without_extension, extension = os.path.splitext(filename)
-			if extension == '.h5':
-				track_id = hdf5_getters.get_track_id(hdf)
-				segments_start = hdf5_getters.get_segments_start(hdf)
-				segments_confidence = hdf5_getters.get_segments_confidence(hdf)
-				segments_pitches = hdf5_getters.get_segments_pitches(hdf)
-				segments_timbre = hdf5_getters.get_segments_timbre(hdf)
-				segments_loudness_max = hdf5_getters.get_segments_loudness_max(hdf)
-				segments_loudness_max_time = hdf5_getters.get_segments_loudness_max_time(hdf)
-				segments_loudness_start = hdf5_getters.get_segments_loudness_start(hdf)
-				
-				trList = [track_id.decode(), segments_start, segments_confidence, segments_pitches, segments_timbre, segments_loudness_max, segments_loudness_max_time, segments_loudness_start]
-
-				writer_segments_file.writerow(trList)
-				hdf.close()
-
-
-
-with open(csvSectionsFile, "w") as outputSectionsFile:
-	writer_sections_file= csv.writer(outputSectionsFile, lineterminator='\n')
-	for dirname, dirs, files in os.walk(files):
-		for filename in files:
-			filename_without_extension, extension = os.path.splitext(filename)
-			if extension == '.h5':
-				track_id = hdf5_getters.get_track_id(hdf)
-				sections_start = hdf5_getters.get_sections_start(hdf)
-				sections_confidence = hdf5_getters.get_sections_confidence(hdf)
-				
-				trList = [track_id.decode(), sections_start, sections_confidence]
-
-				writer_sections_file.writerow(trList)
-				hdf.close()
-output.close()
-
-
-with open(csvBeatsFile, "w") as outputBeatsFile:
-	writer_beats_file = csv.writer(outputBeatsFile, lineterminator='\n')
-	for dirname, dirs, files in os.walk(files):
-		for filename in files:
-			filename_without_extension, extension = os.path.splitext(filename)
-			if extension == '.h5':
-				track_id = hdf5_getters.get_track_id(hdf)
-				beats_start = hdf5_getters.get_beats_start(hdf)
-				beats_confidence = hdf5_getters.get_beats_confidence(hdf)
-				
-				trList = [track_id.decode(), beats_start, beats_confidence]
-
-				writer_beats_file.writerow(trList)
-				hdf.close()
-output.close()
-
-
-with open(csvBarsFile, "w") as outputBarsFile:
-	writer_bars_file = csv.writer(outputBarsFile, lineterminator='\n')
-	for dirname, dirs, files in os.walk(files):
-		for filename in files:
-			filename_without_extension, extension = os.path.splitext(filename)
-			if extension == '.h5':
-				track_id = hdf5_getters.get_track_id(hdf)
-				bars_start = hdf5_getters.get_bars_start(hdf)
-				bars_confidence = hdf5_getters.get_bars_confidence(hdf)
-				
-				trList = [track_id.decode(), bars_start, bars_confidence]
-
-				writer_bars_file.writerow(trList)
-				hdf.close()
-output.close()
-
-
-
-with open(csvTatumsFile, "w") as outputTatumsFile:
-	writer_tatums_file = csv.writer(outputTatumsFile, lineterminator='\n')
-	for dirname, dirs, files in os.walk(files):
-		for filename in files:
-			filename_without_extension, extension = os.path.splitext(filename)
-			if extension == '.h5':
-				track_id = hdf5_getters.get_track_id(hdf)
-				tatums_start = hdf5_getters.get_tatums_start(hdf)
-				tatums_confidence = hdf5_getters.get_tatums_confidence(hdf)
-				
-				trList = [track_id.decode(), tatums_start, tatums_confidence]
-
-				writer_tatums_file.writerow(trList)
-				hdf.close()
-output.close()
-
-
-with open(csvMBTagsFile, "w") as outputMBTagsFile:
-	writer_MBTags_File = csv.writer(outputMBTagsFile, lineterminator='\n')
-	for dirname, dirs, files in os.walk(files):
-		for filename in files:
-			filename_without_extension, extension = os.path.splitext(filename)
-			if extension == '.h5':
-				artist_id = hdf5_getters.get_artist_id(hdf)
-				artist_mbtags = hdf5_getters.get_artist_mbtags(hdf)
-				artist_mbtags_count = hdf5_getters.get_artist_mbtags_count(hdf)
-				
-				trList = [artist_id.decode(), np.array([x.decode() for x in artist_mbtags]), artist_mbtags_count]
-
-				writer_MBTags_File.writerow(trList)
-				hdf.close()
-output.close()
-
-'''
