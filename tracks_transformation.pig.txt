@@ -105,13 +105,39 @@ TR_TATUMS = FOREACH JN_TR_TATUMS GENERATE TR_BARS::artist_id AS artist_id, TR_BA
 
 MBTAGS = LOAD '/user/maria_dev/music/mbtags.csv' USING org.apache.pig.piggybank.storage.CSVExcelStorage(',','YES_MULTILINE') AS (artist_id: chararray, artist_mbtags:chararray, artist_mbtags_count:chararray);
 
-JN_TR_MBTAGS = JOIN TR_TATUMS BY artist_id, MBTAGS by artist_id;
+DISTINCT_MBTAGS = DISTINCT MBTAGS;
 
-TR_MBTAGS = FOREACH JN_TR_MBTAGS GENERATE TR_TATUMS::artist_id AS artist_id, TR_TATUMS::artists_mb_id AS artists_mb_id, TR_TATUMS::artist_playmeid AS artist_playmeid, TR_TATUMS::artist_7digitalid AS artist_7digitalid, TR_TATUMS::artist_familarity AS artist_familarity, TR_TATUMS::artist_name AS artist_name, TR_TATUMS::artist_hotttnesss AS artist_hotttnesss, TR_TATUMS::artist_location AS artist_location, TR_TATUMS::release AS release, TR_TATUMS::release_7digitalid AS release_7digitalid, TR_TATUMS::song_id AS song_id, TR_TATUMS::title AS title, TR_TATUMS::song_hotttnesss AS song_hotttnesss, TR_TATUMS::track_7digitalid AS track_7digitalid, TR_TATUMS::analysis_sample_rate AS analysis_sample_rate, TR_TATUMS::audio_md5 AS audio_md5, TR_TATUMS::duration AS duration, TR_TATUMS::end_of_fade_in AS end_of_fade_in, TR_TATUMS::energy AS energy, TR_TATUMS::key AS key, TR_TATUMS::key_confidence AS key_confidence, TR_TATUMS::loudness AS loudness, TR_TATUMS::mode AS mode, TR_TATUMS::mode_confidence AS mode_confidence, TR_TATUMS::start_of_fade_out AS start_of_fade_out, TR_TATUMS::tempo AS tempo, TR_TATUMS::time_signature AS time_signature, TR_TATUMS::time_signature_confidence AS time_signature_confidence, TR_TATUMS::track_id AS track_id, TR_TATUMS::year AS year, TR_TATUMS::similar_artists AS similar_artists, TR_TATUMS::artist_terms AS artist_terms, TR_TATUMS::artist_terms_freq AS artist_terms_freq, TR_TATUMS::artist_terms_weight AS artist_terms_weight, TR_TATUMS::segments_start AS segments_start, TR_TATUMS::segments_confidence AS segments_confidence, TR_TATUMS::segments_pitches AS segments_pitches, TR_TATUMS::segments_timbre AS segments_timbre, TR_TATUMS::segments_loudness_max AS segments_loudness_max, TR_TATUMS::segments_loudness_max_time AS segments_loudness_max_time, TR_TATUMS::segments_loudness_start AS segments_loudness_start, TR_TATUMS::sections_start AS sections_start, TR_TATUMS::sections_confidence AS sections_confidence, TR_TATUMS::beats_start AS beats_start, TR_TATUMS::beats_confidence AS beats_confidence, TR_TATUMS::bars_start AS bars_start, TR_TATUMS::bars_confidence AS bars_confidence, TR_TATUMS::tatums_start AS tatums_start, TR_TATUMS::tatums_confidence AS tatums_confidence, MBTAGS::artist_mbtags AS artist_mbtags, MBTAGS::artist_mbtags_count AS artist_mbtags_count;
-
-/*STORE MBTAGS into '/user/maria_dev/project_output/mbtags/' USING org.apache.pig.piggybank.storage.CSVExcelStorage(',','YES_MULTILINE');*/
-
-/*STORE JN_TR_MBTAGS into '/user/maria_dev/project_output/tracks/' USING org.apache.pig.piggybank.storage.CSVExcelStorage(',','YES_MULTILINE');*/
+JN_TR_MBTAGS = JOIN TR_TATUMS BY artist_id, DISTINCT_MBTAGS by artist_id;
 
 
-STORE JN_TR_MBTAGS INTO 'hbase://tracks' USING org.apache.pig.backend.hadoop.hbase.HBaseStorage ('artist_details:TRACK_RELATION::artist_id, track_details:SEGMENTS::track_id');
+TR_MBTAGS = FOREACH JN_TR_MBTAGS GENERATE TR_TATUMS::artist_id AS artist_id, TR_TATUMS::artists_mb_id AS artists_mb_id, TR_TATUMS::artist_playmeid AS artist_playmeid, TR_TATUMS::artist_7digitalid AS artist_7digitalid, TR_TATUMS::artist_familarity AS artist_familarity, TR_TATUMS::artist_name AS artist_name, TR_TATUMS::artist_hotttnesss AS artist_hotttnesss, TR_TATUMS::artist_location AS artist_location, TR_TATUMS::similar_artists AS similar_artists, TR_TATUMS::artist_terms AS artist_terms, TR_TATUMS::artist_terms_freq AS artist_terms_freq, TR_TATUMS::artist_terms_weight AS artist_terms_weight, DISTINCT_MBTAGS::artist_mbtags AS artist_mbtags, DISTINCT_MBTAGS::artist_mbtags_count AS artist_mbtags_count, TR_TATUMS::release AS release, TR_TATUMS::release_7digitalid AS release_7digitalid, TR_TATUMS::song_id AS song_id, TR_TATUMS::title AS title, TR_TATUMS::song_hotttnesss AS song_hotttnesss, TR_TATUMS::track_7digitalid AS track_7digitalid, TR_TATUMS::analysis_sample_rate AS analysis_sample_rate, TR_TATUMS::audio_md5 AS audio_md5, TR_TATUMS::duration AS duration, TR_TATUMS::end_of_fade_in AS end_of_fade_in, TR_TATUMS::energy AS energy, TR_TATUMS::key AS key, TR_TATUMS::key_confidence AS key_confidence, TR_TATUMS::loudness AS loudness, TR_TATUMS::mode AS mode, TR_TATUMS::mode_confidence AS mode_confidence, TR_TATUMS::start_of_fade_out AS start_of_fade_out, TR_TATUMS::tempo AS tempo, TR_TATUMS::time_signature AS time_signature, TR_TATUMS::time_signature_confidence AS time_signature_confidence, TR_TATUMS::track_id AS track_id, TR_TATUMS::year AS year,TR_TATUMS::segments_start AS segments_start, TR_TATUMS::segments_confidence AS segments_confidence, TR_TATUMS::segments_pitches AS segments_pitches, TR_TATUMS::segments_timbre AS segments_timbre, TR_TATUMS::segments_loudness_max AS segments_loudness_max, TR_TATUMS::segments_loudness_max_time AS segments_loudness_max_time, TR_TATUMS::segments_loudness_start AS segments_loudness_start, TR_TATUMS::sections_start AS sections_start, TR_TATUMS::sections_confidence AS sections_confidence, TR_TATUMS::beats_start AS beats_start, TR_TATUMS::beats_confidence AS beats_confidence, TR_TATUMS::bars_start AS bars_start, TR_TATUMS::bars_confidence AS bars_confidence, TR_TATUMS::tatums_start AS tatums_start, TR_TATUMS::tatums_confidence AS tatums_confidence;
+
+
+
+
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-common-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-client-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-http-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-mapreduce-2.0.0.3.0.1.0-187.jar ;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-metrics-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-metrics-api-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-procedure-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-protocol-2.0.0.3.0.1.0-187.jar ;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-protocol-shaded-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-replication-2.0.0.3.0.1.0-187.jar ;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-server-2.0.0.3.0.1.0-187.jar ;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-shaded-miscellaneous-2.1.0.jar ;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-shaded-netty-2.1.0.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-protocol-shaded-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-shaded-protobuf-2.1.0.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hbase-zookeeper-2.0.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/hive-common-3.1.0.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/zookeeper-3.4.6.3.0.1.0-187.jar;
+REGISTER /usr/hdp/3.0.1.0-187/pig/lib/guava-11.0.jar;
+REGISTER /usr/hdp/3.0.1.0-187/hbase/lib/htrace-core4-4.2.0-incubating.jar;
+REGISTER /usr/hdp/3.0.1.0-187/hbase/lib/htrace-core-3.2.0-incubating.jar;
+
+
+
+
+STORE TR_MBTAGS INTO 'hbase://music:tracks' USING org.apache.pig.backend.hadoop.hbase.HBaseStorage('artist_details:artists_mb_id,artist_details:artist_playmeid,artist_details:artist_7digitalid,artist_details:artist_familarity,artist_details:artist_name,artist_details:artist_hotttnesss,artist_details:artist_location,artist_details:similar_artists,artist_details:artist_terms,artist_details:artist_terms_freq,artist_details:artist_terms_weight,artist_details:artist_mbtags,artist_details:artist_mbtags_count,track_details:release,track_details:release_7digitalid,track_details:song_id,track_details:title,track_details:song_hotttnesss,track_details:track_7digitalid,track_details:analysis_sample_rate,track_details:audio_md5,track_details:duration,track_details:end_of_fade_in,track_details:energy,track_details:key,track_details:key_confidence,track_details:loudness,track_details:mode,track_details:mode_confidence,track_details:start_of_fade_out,track_details:tempo,track_details:time_signature,time_signature_confidence,track_details:track_id,track_details:year,track_details:segments_start,track_details:segments_confidence,track_details:segments_pitches,track_details:segments_timbre,track_details:segments_loudness_max,track_details:segments_loudness_start,track_details:sections_start,track_details:sections_confidence,track_details:beats_start,track_details:beats_confidence,track_details:bars_start,track_details:bars_confidence,track_details:tatums_start,track_details:tatums_confidence')
