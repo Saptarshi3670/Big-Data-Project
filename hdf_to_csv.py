@@ -10,7 +10,9 @@ files = '/Users/saptarshimaiti/Downloads/MillionSongSubset/data/'
 csvTracksFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/TRACKS.csv'
 csvSimilarArtistFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/similar_artists.csv'
 csvArtistTermsFile='/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/artist_terms.csv'
-csvSegmentsFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/segments.csv'
+csvSegmentsStrtFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/segmentsstrt.csv'
+csvSegmentsToneFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/segmentstone.csv'
+csvSegmentsLoudFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/segmentsloud.csv'
 csvSectionsFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/sections.csv'
 csvBeatsFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/beats.csv'
 csvBarsFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/bars.csv'
@@ -18,11 +20,13 @@ csvTatumsFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/mus
 csvMBTagsFile = '/Users/saptarshimaiti/Desktop/Big Data technologies/Project/music/mbtags.csv'
 
 ##Splitting and Converting hdf files into multiple csv files
-with open(csvTracksFile, "w") as outputTracks, open(csvSimilarArtistFile, "w") as outputSimilarArtists, open(csvArtistTermsFile, "w") as outputArtistTermsFile, open(csvSegmentsFile, "w") as outputSegmentsFile, open(csvSectionsFile, "w") as outputSectionsFile, open(csvBeatsFile, "w") as outputBeatsFile, open(csvBarsFile, "w") as outputBarsFile, open(csvTatumsFile, "w") as outputTatumsFile, open(csvMBTagsFile, "w") as outputMBTagsFile:
+with open(csvTracksFile, "w") as outputTracks, open(csvSimilarArtistFile, "w") as outputSimilarArtists, open(csvArtistTermsFile, "w") as outputArtistTermsFile, open(csvSegmentsStrtFile, "w") as outputSegmentsStrtFile, open(csvSegmentsToneFile, "w") as outputSegmentsToneFile, open(csvSegmentsLoudFile, "w") as outputSegmentsLoudFile, open(csvSectionsFile, "w") as outputSectionsFile, open(csvBeatsFile, "w") as outputBeatsFile, open(csvBarsFile, "w") as outputBarsFile, open(csvTatumsFile, "w") as outputTatumsFile, open(csvMBTagsFile, "w") as outputMBTagsFile:
 	writer_tracks = csv.writer(outputTracks, lineterminator='\n')
 	writer_similar_artists = csv.writer(outputSimilarArtists, lineterminator='\n')
 	writer_artist_terms = csv.writer(outputArtistTermsFile, lineterminator='\n')
-	writer_segments_file = csv.writer(outputSegmentsFile, lineterminator='\n')
+	writer_segments_strt_file = csv.writer(outputSegmentsStrtFile, lineterminator='\n')
+	writer_segments_tone_file = csv.writer(outputSegmentsToneFile, lineterminator='\n')
+	writer_segments_loud_file = csv.writer(outputSegmentsLoudFile, lineterminator='\n')
 	writer_sections_file= csv.writer(outputSectionsFile, lineterminator='\n')
 	writer_beats_file = csv.writer(outputBeatsFile, lineterminator='\n')
 	writer_bars_file = csv.writer(outputBarsFile, lineterminator='\n')
@@ -71,9 +75,11 @@ with open(csvTracksFile, "w") as outputTracks, open(csvSimilarArtistFile, "w") a
 				artist_terms_weight = hdf5_getters.get_artist_terms_weight(hdf)
 
 				segments_start = hdf5_getters.get_segments_start(hdf)
+
 				segments_confidence = hdf5_getters.get_segments_confidence(hdf)
 				segments_pitches = hdf5_getters.get_segments_pitches(hdf)
 				segments_timbre = hdf5_getters.get_segments_timbre(hdf)
+
 				segments_loudness_max = hdf5_getters.get_segments_loudness_max(hdf)
 				segments_loudness_max_time = hdf5_getters.get_segments_loudness_max_time(hdf)
 				segments_loudness_start = hdf5_getters.get_segments_loudness_start(hdf)
@@ -102,8 +108,10 @@ with open(csvTracksFile, "w") as outputTracks, open(csvSimilarArtistFile, "w") a
 				trList = [artist_id.decode(), np.array([x.decode() for x in artist_terms]),artist_terms_freq, artist_terms_weight]
 				writer_artist_terms.writerow(trList)
 
+
 				trList = [track_id.decode(),segments_start, segments_confidence, segments_pitches, segments_timbre, segments_loudness_max, segments_loudness_max_time, segments_loudness_start]
 				writer_segments_file.writerow(trList)
+
 
 				trList = [track_id.decode(), sections_start, sections_confidence]
 				writer_sections_file.writerow(trList)
