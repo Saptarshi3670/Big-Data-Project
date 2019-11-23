@@ -1,0 +1,4 @@
+create 'modelx1','artist_details','track_details'
+
+enable 'modelx1'
+
