@@ -1,8 +1,9 @@
+--created database
 CREATE DATABASE IF NOT EXISTS musicDb;
 
 
 
-
+--created tables
 CREATE TABLE IF NOT EXISTS musicDb.spotifyMusic(artist_name STRING,track_id STRING,track_name STRING, acousticness DOUBLE, 
 danceability DOUBLE,duration INT, energy DOUBLE,instrumental DOUBLE,key INT, liveness DOUBLE, loudness DOUBLE, mode INT,
 speechiness DOUBLE, tempo DOUBLE, time_signature INT, valence DOUBLE, popularity INT, popularity_bool INT) COMMENT 'Music Track Details'
