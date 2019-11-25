@@ -1,3 +1,5 @@
+--Inserting data into multiple tables from musicDb.spotifymusic
+
 INSERT INTO TABLE musicDb.musicPopularityAnalysis
 SELECT "POPULAR" AS popularity,mode AS mode, popularity_bool, MAX(acousticness) AS max_accousticness, MIN(acousticness) AS min_accousticness, 
 AVG(acousticness) AS avg_accousticness, MAX(danceability) AS max_danceability, MIN(danceability) AS min_danceability, AVG(danceability) AS avg_danceability, 
