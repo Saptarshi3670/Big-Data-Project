@@ -1,3 +1,4 @@
+-- Queries Used for analysis
 SELECT  popularity, popularity_bool,MAX(max_duration) AS max_duration, MIN(min_duration) AS min_duration, AVG(avg_duration) AS avg_duration  FROM 
 musicDb.musicPopularityAnalysis
 GROUP BY popularity, popularity_bool;
